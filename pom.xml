@@ -8,8 +8,15 @@
     <packaging>pom</packaging>
     <name>tickets</name>
     <url>http://maven.apache.org</url>
+    <organization>
+        <name>CODEheures</name>
+        <url>https://codeheures.fr</url>
+    </organization>
     <properties>
+        <application.name>TicketTac</application.name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+        <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
     </properties>
     <profiles>
         <profile>
@@ -76,6 +83,11 @@
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>3.6.2</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.4.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -103,6 +115,10 @@
                                     <profiles>dev,staging,prod</profiles>
                                     <all>false</all>
                                 </requireActiveProfile>
+                                <requireProperty>
+                                    <property>buildTimestamp</property>
+                                    <message>"Build time stamp specified."</message>
+                                </requireProperty>
                             </rules>
                             <fail>true</fail>
                         </configuration>
